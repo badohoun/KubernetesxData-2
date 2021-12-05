@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-ml
+  labels:
+    app: api-ml
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: pod-api-ml
+  template:
+    metadata:
+      labels:
+        app: pod-api-ml
+    spec:
+      containers:
+      - name: pod-api-ml
+        image: blentai/api_ml_k8s:latest
+        ports:
+        - containerPort: 80
+        resources:
+          requests:
+            memory: "1G"
+            cpu: "1"
+          limits:
+            memory: "3G"
+            cpu: "3"
